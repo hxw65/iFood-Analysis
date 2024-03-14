@@ -125,9 +125,7 @@ model_svm <- svm(Response ~ ., data = train_data, probability = TRUE)
 model_rf <- randomForest(Response ~ ., data = train_data, method = "class")
 # Get feature importance
 feature_importance <- importance(model_rf)
-# View the feature importance scores
 print(feature_importance)
-# For a more visual representation, you can plot the feature importances
 importance_data <- as.data.frame(importance(model_rf))
 ggplot(importance_data, aes(x = reorder(row.names(importance_data), MeanDecreaseGini), y = MeanDecreaseGini)) +
   geom_bar(stat = "identity", fill = "skyblue") +
@@ -197,7 +195,6 @@ predicted_classes_rf <- factor(ifelse(positive_class_probs > 0.5, "1", "0"))
 
 library(caret)
 
-# Ensure  test_data$Response is factor variable with 0 and 1
 test_data$Response <- as.factor(test_data$Response)
 typeof(test_data$Response)
 #Logit function
